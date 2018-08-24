@@ -1,0 +1,10 @@
+set network.@switch_vlan[0].vlan='1'
+set network.@switch_vlan[1].ports='4t 6t'
+set network.@switch_vlan[1].vlan='832'
+set network.wan.broadcast='1'
+set network.wan.ifname='eth1.832'
+set network.wan.reqopts='0x01 0x15 0x28 0x51 0x58 0x59 0x90'
+set network.wan.vendorid='sagem'
+set network.wan6.ifname='eth1.832'
+
+commit
