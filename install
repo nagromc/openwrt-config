@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+chosen_router=""
+
+while getopts "r:" opt; do
+    case "$opt" in
+        r)
+            chosen_router=$OPTARG
+
+            if [ $chosen_router != "wrt1900acv2" ] && [ $chosen_router != "wrt610n" ]; then
+                echo "-r must be either wrt1900acv2 or wrt610n"
+                exit 1
+            fi
+            ;;
+    esac
+done
+
+echo $chosen_router
+
+
+ENCODED_FTI=$(echo -n $CLEARTEXT_FTI | xxd  -p)
+
+gpg --output common.dhcp.secret.config --decrypt common.dhcp.secret.config.asc
+scp *.config root@192.168.1.1:/tmp/
+ssh root@192.168.1.1 "cat /tmp/$chosen_router.network.config | uci -m import network && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.dhcp.config | uci -m import dhcp && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.network.config | uci -m import network && uci commit"
+ssh root@192.168.1.1 "uci set network.wan.sendopts='0x4D:2b46535644534c5f6c697665626f782e496e7465726e65742e736f66746174686f6d652e4c697665626f7833 0x5a:0000000000000000000000$ENCODED_FTI' && uci commit"
+ssh root@192.168.1.1 "uci set network.wan6.sendopts='11:0000000000000000000000$ENCODED_FTI  15:FSVDSL_livebox.Internet.softathome.livebox3 16:0000040e0005736167656d' && uci commit"
