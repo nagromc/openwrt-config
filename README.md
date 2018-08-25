@@ -15,6 +15,6 @@ Depending on which router you want to configure, run the following commands from
 
 ```shell
 $ scp config.wrt1900acv2 root@192.168.1.1:/tmp/config \
-    && ssh root@192.168.1.1 uci -f /tmp/config batch \
+    && ssh root@192.168.1.1 "cat /tmp/config | uci -m import network && uci commit" \
     && ssh root@192.168.1.1 "uci set network.wan.sendopts='0x4D:2b46535644534c5f6c697665626f782e496e7465726e65742e736f66746174686f6d652e4c697665626f7833 0x5a:0000000000000000000000$ENCODED_FTI' && uci commit"
 ```
