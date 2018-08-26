@@ -30,6 +30,7 @@ ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp &&
 ssh root@192.168.1.1 "cat /tmp/common.ddns.secret.config | uci -m import ddns && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.network.config | uci -m import network && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.sslh.config | uci -m import sslh && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.system.config | uci -m import system && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.wireless.config | uci -m import wireless && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.wireless.secret.config | uci -m import wireless && uci commit"
 ssh root@192.168.1.1 "uci set network.wan.sendopts='0x4D:2b46535644534c5f6c697665626f782e496e7465726e65742e736f66746174686f6d652e4c697665626f7833 0x5a:0000000000000000000000$ENCODED_FTI' && uci commit"
