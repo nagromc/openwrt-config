@@ -28,6 +28,7 @@ ssh root@192.168.1.1 "cat /tmp/$chosen_router.network.config | uci -m import net
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.ddns.secret.config | uci -m import ddns && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.firewall.config | uci -m import firewall && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.network.config | uci -m import network && uci commit"
 # no merging for simple-adblock
 ssh root@192.168.1.1 "cat /tmp/common.simple-adblock.config | uci import simple-adblock && uci commit"
