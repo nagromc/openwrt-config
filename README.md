@@ -16,3 +16,7 @@ Depending on which router you want to configure (`wrt1900acv2` or `wrt610n`), ru
 ```shell
 $ ./install -r wrt1900acv2
 ```
+
+## References
+
+The Internet connection part is based on this thread: [Remplacement de la Livebox par un routeur Openwrt 18+ (DHCP V4/V6 + TV)](https://lafibre.info/remplacer-livebox/remplacement-de-la-livebox-par-un-routeur-openwrt-18-dhcp-v4v6-tv/).
