@@ -18,6 +18,11 @@ done
 echo $chosen_router
 
 
+if [ -z "$CLEARTEXT_FTI" ]; then
+    echo "\$CLEARTEXT_FTI is empty. Please set it with: \`export CLEARTEXT_FTI=fti/xxxxxxx\`"
+    exit 2
+fi
+
 ENCODED_FTI=$(echo -n $CLEARTEXT_FTI | xxd  -p)
 
 gpg --batch --yes --output common.dhcp.secret.config --decrypt common.dhcp.secret.config.asc
