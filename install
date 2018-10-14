@@ -25,9 +25,7 @@ fi
 
 ENCODED_FTI=$(echo -n $CLEARTEXT_FTI | xxd  -p)
 
-gpg --batch --yes --output common.dhcp.secret.config --decrypt common.dhcp.secret.config.asc
-gpg --batch --yes --output common.ddns.secret.config --decrypt common.ddns.secret.config.asc
-gpg --batch --yes --output common.wireless.secret.config --decrypt common.wireless.secret.config.asc
+gpg --batch --yes --decrypt-files *.secret.config.asc
 
 scp *.config root@192.168.1.1:/tmp/
 ssh root@192.168.1.1 "cat /tmp/$chosen_router.network.config | uci -m import network && uci commit"
