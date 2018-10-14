@@ -35,7 +35,7 @@ ssh root@192.168.1.1 "uci set network.wan6.sendopts='11:00000000000000000000001a
 echo "Waiting for router to reboot..."&& ssh root@192.168.1.1 "reboot" && sleep 45
 
 scp *.config root@192.168.1.1:/tmp/
-ssh root@192.168.1.1 "opkg update && opkg install block-mount ca-certificates ddns-scripts_no-ip_com kmod-fs-ntfs kmod-fs-vfat luci-app-ddns luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
+ssh root@192.168.1.1 "opkg update && opkg install block-mount ca-certificates ddns-scripts_no-ip_com kmod-fs-ntfs kmod-fs-vfat luci-app-ddns luci-app-samba luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.ddns.secret.config | uci -m import ddns && uci commit"
@@ -53,3 +53,7 @@ ssh root@192.168.1.1 "cat /tmp/common.wireless.secret.config | uci -m import wir
 ssh root@192.168.1.1 "wget --output-document=/etc/dropbear/authorized_keys https://raw.githubusercontent.com/nagromc/dotfiles/master/ssh/authorized_keys"
 scp common.dropbear.config root@192.168.1.1:/tmp/
 ssh root@192.168.1.1 "cat /tmp/common.dropbear.config | uci -m import dropbear && uci commit && /etc/init.d/dropbear restart"
+scp rc.local root@192.168.1.1:/etc/
+ssh root@192.168.1.1 "echo 'morgan:*:1000:65534:morgan:/var:/bin/false' >> /etc/passwd"
+scp samba-passwd root@192.168.1.1:/tmp/samba-passwd
+ssh root@192.168.1.1 "smbpasswd -s -a morgan < /tmp/samba-passwd"
