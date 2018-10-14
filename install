@@ -35,11 +35,12 @@ ssh root@192.168.1.1 "uci set network.wan6.sendopts='11:00000000000000000000001a
 echo "Waiting for router to reboot..."&& ssh root@192.168.1.1 "reboot" && sleep 45
 
 scp *.config root@192.168.1.1:/tmp/
-ssh root@192.168.1.1 "opkg update && opkg install block-mount ca-certificates ddns-scripts_no-ip_com kmod-fs-ntfs kmod-fs-vfat luci-app-ddns luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
+ssh root@192.168.1.1 "opkg update && opkg install block-mount ca-certificates ddns-scripts_no-ip_com kmod-fs-ntfs kmod-fs-vfat luci-app-ddns luci-app-minidlna luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.ddns.secret.config | uci -m import ddns && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.firewall.config | uci -m import firewall && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.minidlna.config | uci -m import minidlna && uci commit"
 # no merging for simple-adblock
 ssh root@192.168.1.1 "cat /tmp/common.simple-adblock.config | uci import simple-adblock && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.sslh.config | uci -m import sslh && uci commit"
