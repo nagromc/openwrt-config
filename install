@@ -37,7 +37,7 @@ ssh root@192.168.1.1 "uci set network.wan6.sendopts='11:00000000000000000000001a
 echo "Waiting for router to reboot..."&& ssh root@192.168.1.1 "reboot" && sleep 45
 
 scp *.config root@192.168.1.1:/tmp/
-ssh root@192.168.1.1 "opkg update && opkg install ca-certificates ddns-scripts_no-ip_com luci-app-ddns luci-app-simple-adblock luci-app-uhttpd luci-app-wol luci-ssl sslh wget"
+ssh root@192.168.1.1 "opkg update && opkg install ca-certificates ddns-scripts_no-ip_com luci-app-ddns luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.ddns.secret.config | uci -m import ddns && uci commit"
@@ -49,6 +49,7 @@ ssh root@192.168.1.1 "cat /tmp/common.system.config | uci -m import system && uc
 ssh root@192.168.1.1 "uci del uhttpd.main.listen_https && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.uhttpd.config | uci -m import uhttpd && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.uhttpd.secret.config | uci -m import uhttpd && uci commit"
+ssh root@192.168.1.1 "cat /tmp/common.upnpd.config | uci -m import upnpd && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.wireless.config | uci -m import wireless && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.wireless.secret.config | uci -m import wireless && uci commit"
 ssh root@192.168.1.1 "wget --output-document=/etc/dropbear/authorized_keys https://raw.githubusercontent.com/nagromc/dotfiles/master/ssh/authorized_keys"
