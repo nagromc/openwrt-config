@@ -1,0 +1,3 @@
+[submodule "bin/openwrt-configuration-for-livebox"]
+    path = bin/openwrt-configuration-for-livebox
+    url = https://github.com/nagromc/openwrt-configuration-for-livebox

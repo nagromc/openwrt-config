@@ -14,7 +14,7 @@ $ export CLEARTEXT_FTI=fti/xxxxxxx
 Depending on which router you want to configure (`wrt1900acv2` or `wrt610n`), run the following command from your own machine:
 
 ```shell
-$ ./install -r wrt1900acv2
+$ ./install wrt1900acv2
 ```
 
 ## References
