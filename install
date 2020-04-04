@@ -6,7 +6,7 @@ sleep 45
 
 gpg --batch --yes --decrypt-files *.secret.config.asc
 scp *.config root@192.168.1.1:/tmp/
-ssh root@192.168.1.1 "opkg update && opkg install block-mount ca-certificates ddns-scripts_no-ip_com kmod-fs-ntfs kmod-fs-vfat luci-app-ddns luci-app-minidlna luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
+ssh root@192.168.1.1 "opkg update && opkg install block-mount ca-certificates ddns-scripts_no-ip_com kmod-fs-ntfs kmod-fs-vfat luci-app-ddns luci-app-minidlna luci-app-nft-qos luci-app-simple-adblock luci-app-uhttpd luci-app-upnp luci-app-wol luci-ssl sslh wget"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.dhcp.secret.config | uci -m import dhcp && uci commit"
 ssh root@192.168.1.1 "cat /tmp/common.ddns.secret.config | uci -m import ddns && uci commit"
